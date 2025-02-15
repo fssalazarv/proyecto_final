@@ -20,7 +20,7 @@ def GenerateReportVentas(app:App):
             total_vendido DESC;
     """
     df=pd.read_sql_query(query,conn)
-    path="files/data.xls"
+    path="/workspaces/workspacepy0125/proyecto/files/data.xls"
     df.to_csv(path)
     sendMail(app,path)
 

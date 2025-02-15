@@ -26,7 +26,7 @@ def IngestDataProducts(app:App):
 
 # insert products
 def GetDataSourcePais():
-    pathData="/workspaces/workspacepy0125/proyecto/files/data.xls"
+    pathData="/workspaces/workspacepy0125v2/proyecto/files/datafuente.xls"
     df=pd.read_excel(pathData,sheet_name="Orders")
     print(df.shape)
     print(df.keys())
@@ -45,7 +45,7 @@ def InsertDataPais(bd:Database,data):
 
 
 def GetDatoSourcePostalCode():
-    pathData="/workspaces/workspacepy0125/proyecto/files/data.xls"
+    pathData="/workspaces/workspacepy0125v2/proyecto/files/datafuente.xls"
     df=pd.read_excel(pathData,sheet_name="Orders")
     df['Postal Code'] = df['Postal Code'].astype(str)
     df_postalCode=df[['Postal Code','Country','State']]
@@ -64,7 +64,7 @@ def InsertDataPostalCode(bd:Database,data):
     bd.insert_many('POSTALCODE',['code','pais','state'],data)
 
 def GetDataSourceCategories():
-    pathData="/workspaces/workspacepy0125/proyecto/files/data.xls"
+    pathData="/workspaces/workspacepy0125v2/proyecto/files/datafuente.xls"
     df=pd.read_excel(pathData,sheet_name="Orders")
     df_categories=df[['Category','Sub-Category']].dropna().drop_duplicates()
     categories_tuples=[tuple(x) for x in df_categories.to_records(index=False)]
@@ -79,7 +79,7 @@ def InsertManyCategories(bd:Database,data):
 
 
 def GetDataSourceProductos(conn):
-    pathData="/workspaces/workspacepy0125/proyecto/files/data.xls"
+    pathData="/workspaces/workspacepy0125v2/proyecto/files/datafuente.xls"
     df=pd.read_excel(pathData,sheet_name="Orders")
     df_products=df[['Product ID','Product Name','Category']].dropna().drop_duplicates()
     df_categoria=pd.read_sql_query("SELECT id,name FROM CATEGORIAS",conn)
@@ -99,7 +99,7 @@ def InsertManyProducts(bd:Database,data):
 
 
 def GetDatasourceOrders(conn):
-    pathData="/workspaces/workspacepy0125/proyecto/files/data.xls"
+    pathData="/workspaces/workspacepy0125v2/proyecto/files/datafuente.xls"
     df=pd.read_excel(pathData,sheet_name="Orders")
     df_products=pd.read_sql_query("SELECT id,name,product_id FROM PRODUCTOS",conn)
     df_orders=df[['Order ID','Postal Code','Product ID','Sales','Quantity','Discount','Profit','Shipping Cost','Order Priority']].dropna().drop_duplicates()

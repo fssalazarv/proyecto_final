@@ -9,7 +9,7 @@ from config.app import *
 ## import reports
 
 from controller.reports import *
-from controller.reports_categoria import *
+from controller.reports_categoria import *  # Importamos el nuevo módulo de reportes por categoría
 
 def menu(app: App):
     console = Console()
@@ -20,7 +20,7 @@ def menu(app: App):
         menu_text.append("\n📊 [bold cyan]Proyecto Datux[/bold cyan]\n", style="underline bold")
         menu_text.append("\n[1] 🟢 Ingestar Data\n", style="green")
         menu_text.append("[2] 📈 Reporte de Ventas\n", style="blue")
-        menu_text.append("[3] 📊 Reporte de Ventas por Categoría\n", style="magenta")
+        menu_text.append("[3] 📊 Reporte de Ventas por Categoría\n", style="magenta")  # Nueva opción
         menu_text.append("[4] ❌ Salir\n", style="red")
 
         # Mostrar el menú en un panel
@@ -35,6 +35,6 @@ def menu(app: App):
         elif opcion == "2":
             GenerateReportVentas(app)
         elif opcion == "3":
-            GenerateReportVentasCategoria(app)  # Nueva función para reporte por categoría
+            GenerateReportVentasCategoria(app)  # Nueva opción para reporte por categoría
         elif opcion == "4":
-            break  # Sale del bucle y 
+            break  # Sale del programa

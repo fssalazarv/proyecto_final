@@ -1,4 +1,4 @@
-from controller.menu import *git add controller/function.py controller/function.py
+from controller.menu import *
 from config.app import *
 from controller.function import *
 if __name__ == "__main__":

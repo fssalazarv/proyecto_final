@@ -3,20 +3,21 @@ import pandas as pd
 import os
 
 def GenerateReportVentasCategoria(app: App):
+    """Genera un reporte de ventas por categoría y lo guarda en un archivo CSV."""
     conn = app.bd.getConection()
     
     query = """
         SELECT 
-            c.category_name,
+            c.name AS category_name,  -- Usamos 'name' porque 'category_name' no existe
             SUM(v.quantity) AS total_vendido
         FROM 
             VENTAS v
         JOIN 
             PRODUCTOS p ON v.product_id = p.product_id
         JOIN 
-            CATEGORIAS c ON p.category_id = c.category_id
+            CATEGORIAS c ON p.category_id = c.id  -- Se usa 'c.id' como clave de categoría
         GROUP BY 
-            c.category_name
+            c.name
         ORDER BY 
             total_vendido DESC;
     """
@@ -35,11 +36,11 @@ def GenerateReportVentasCategoria(app: App):
     
     print(f"✅ Reporte generado correctamente: {path}")
 
-    # Enviar el reporte por correo
+    # Enviar el reporte por correo (opcional)
     sendMail(app, path)
 
 def sendMail(app: App, data):
-    """ Función para enviar el reporte por correo """
+    """Función para enviar el reporte por correo."""
     app.mail.send_email(
         'from@example.com', 
         '📊 Reporte de Ventas por Categoría', 
